@@ -29,6 +29,12 @@ def concat_csvs(pattern, output, exclude_cols=None):
     if exclude_cols:
         residential = residential.drop(columns=[c for c in exclude_cols if c in residential.columns])
 
+    # Drop duplicate .1 columns (e.g. PropertyType.1 → PropertyType)
+    dup_cols = [c for c in residential.columns if c.endswith(".1") and c[:-2] in residential.columns]
+    if dup_cols:
+        residential = residential.drop(columns=dup_cols)
+        print(f"Dropped {len(dup_cols)} duplicate columns: {dup_cols}")
+
     residential.to_csv(output, index=False)
 
 
