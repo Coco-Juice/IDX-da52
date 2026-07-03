@@ -8,22 +8,22 @@ def concat_csvs(pattern, output, exclude_cols=None):
         print(f"No files matched {pattern}")
         return
 
-    # Rows before concat: 893594 (listings), 615725 (sold)
+    # Rows before concat: 929795 (listings), 639916 (sold)
     dfs = [pd.read_csv(f, low_memory=False) for f in files]
     raw = pd.concat(dfs, ignore_index=True)
     total_raw = len(raw)
     print(output)
     print(f"Rows before concat: {total_raw}")
 
-    # Rows after concat: 893594 (listings), 615725 (sold)
+    # Rows after concat: 929795 (listings), 639916 (sold)
     total_concat = len(raw)
     print(f"Rows after concat: {total_concat}")
 
-    # Rows before Residential filter: 893594 (listings), 615725 (sold)
+    # Rows before Residential filter: 929795 (listings), 639916 (sold)
     print(f"Rows before Residential filter: {total_concat}")
 
     residential = raw[raw["PropertyType"] == "Residential"]
-    # Rows after Residential filter: 567549 (listings), 414063 (sold)
+    # Rows after Residential filter: 591619 (listings), 430445 (sold)
     print(f"Rows after Residential filter: {len(residential)}\n")
 
     if exclude_cols:
@@ -33,7 +33,7 @@ def concat_csvs(pattern, output, exclude_cols=None):
     dup_cols = [c for c in residential.columns if c.endswith(".1") and c[:-2] in residential.columns]
     if dup_cols:
         residential = residential.drop(columns=dup_cols)
-        print(f"Dropped {len(dup_cols)} duplicate columns: {dup_cols}")
+        print(f"Dropped {len(dup_cols)} duplicate columns: {dup_cols}\n")
 
     residential.to_csv(output, index=False)
 
