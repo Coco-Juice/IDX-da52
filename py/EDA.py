@@ -361,6 +361,12 @@ def _(NUMERIC_FIELDS, listings, np, sold):
 
 
 @app.cell
+def _(listings):
+    listings['PropertySubType'].unique().tolist()
+    return
+
+
+@app.cell
 def _(sold):
     _both = sold[["ClosePrice", "ListPrice"]].dropna()
     _ratio = _both["ClosePrice"] / _both["ListPrice"]
