@@ -1,0 +1,140 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.11",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "c1b7b1d18b5ff786fb8c4d2ef4e0138a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PaTz",
+      "code_hash": "14614fd1afb1e9821d57cb0d901df453",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ywfE",
+      "code_hash": "4aa5f675585edad903b052e66b0bf148",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TFFA",
+      "code_hash": "b15c3ac4b84dec70abf443d680a17faf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "fpXj",
+      "code_hash": "86c1ecd6359b2caba61bf32e633c3526",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "OIdm",
+      "code_hash": "78a01ed26a6054630d7ff4b6a1c53c82",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "CVkH",
+      "code_hash": "1dbe1c4a4b3ff1052cf2fa258b7d13f1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "0\n0\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "iaZb",
+      "code_hash": "d2f712e965be243d3a987ec86f042905",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "    CloseDate year_month  ClosePrice  rate_30yr_fixed\n0  2024-01-26    2024-01    240000.0           6.6425\n1  2024-01-05    2024-01    815000.0           6.6425\n2  2024-01-05    2024-01    810000.0           6.6425\n3  2024-01-30    2024-01    858000.0           6.6425\n4  2024-01-29    2024-01   1890500.0           6.6425\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "jMTl",
+      "code_hash": "5658a35846f17662d19fbaf8adf7af99",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}
