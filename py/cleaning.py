@@ -173,7 +173,33 @@ def _(listings_dropped, sold_dropped):
         _before = len(sold_clean)
         sold_clean = sold_clean[sold_clean["YearBuilt"] <= 2026]
         print(f"YearBuilt filter (sold): {_before} -> {len(sold_clean)}")
+    return (sold_clean,)
 
+
+@app.cell
+def _(sold_clean):
+    sold_clean['MLSAreaMajor'].unique()
+    return
+
+
+@app.cell
+def _(sold_clean):
+    sold_clean['CountyOrParish'].unique()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    What to do with 'Levels' and 'Flooring'
+
+    What to do with 'MLSAreaMajor'
+    """)
+    return
+
+
+@app.cell
+def _():
     return
 
 

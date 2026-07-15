@@ -151,7 +151,7 @@
       "console": []
     },
     {
-      "id": "Kclp",
+      "id": "RGSE",
       "code_hash": "6e433200326a17da5177eb126dc11a8e",
       "outputs": [
         {
@@ -164,8 +164,8 @@
       "console": []
     },
     {
-      "id": "emfo",
-      "code_hash": "ecdf3b349c5f034173236107487033cf",
+      "id": "Kclp",
+      "code_hash": "378d9dc2d3ebd9b780bb4d8c5d5e4782",
       "outputs": [
         {
           "type": "data",
@@ -182,6 +182,51 @@
           "mimetype": "text/plain"
         }
       ]
+    },
+    {
+      "id": "JyLE",
+      "code_hash": "99ce69e1a949e5ab5dbbce613dff7d8b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;StringArray&gt;\n[                               &#x27;699 - Not Defined&#x27;,                            &#x27;91950 - National City&#x27;,                                                nan,\n                                    &#x27;TAR - Tarzana&#x27;,                            &#x27;SLO - San Luis Obispo&#x27;,                           &#x27;FBS - Fort Bragg South&#x27;,\n                       &#x27;92101 - San Diego Downtown&#x27;,                    &#x27;C21 - Silver Lake - Echo Park&#x27;,                           &#x27;680 - Mount Washington&#x27;,\n                               &#x27;PH - Portola Hills&#x27;,\n ...\n                                      &#x27;ONYX - Onyx&#x27;,                            &#x27;UCTY - Universal City&#x27;,                             &#x27;PL12 - Sierra County&#x27;,\n                                    &#x27;CYMA - Cuyama&#x27;,                              &#x27;LCCC - Copsey Creek&#x27;,                                   &#x27;225 - Romoland&#x27;,\n                                 &#x27;HYDE - Hyde Park&#x27;,           &#x27;VC54 - S.P. West of Ojai/S.P. Rd South&#x27;,                              &#x27;ALT - Alturas-Modoc&#x27;,\n &#x27;VC53 - S.P. East of Ojai/S.P. Rd To Center of Rl&#x27;]\nLength: 1090, dtype: str</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pufh",
+      "code_hash": "388617923f8a0c9de0abcc8f614f89fe",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;StringArray&gt;\n[      &#x27;San Mateo&#x27;,       &#x27;San Diego&#x27;,       &#x27;Riverside&#x27;,     &#x27;Los Angeles&#x27;, &#x27;San Luis Obispo&#x27;,       &#x27;Mendocino&#x27;,     &#x27;Santa Clara&#x27;,          &#x27;Orange&#x27;,         &#x27;Alameda&#x27;,    &#x27;Contra Costa&#x27;,\n         &#x27;Ventura&#x27;,  &#x27;San Bernardino&#x27;,           &#x27;Glenn&#x27;,   &#x27;Santa Barbara&#x27;,      &#x27;Santa Cruz&#x27;,     &#x27;San Joaquin&#x27;,          &#x27;Solano&#x27;,   &#x27;San Francisco&#x27;,        &#x27;Monterey&#x27;,            &#x27;Yolo&#x27;,\n          &#x27;Merced&#x27;,            &#x27;Kern&#x27;,           &#x27;Butte&#x27;,        &#x27;Imperial&#x27;,      &#x27;San Benito&#x27;,      &#x27;Sacramento&#x27;,          &#x27;Tehama&#x27;,           &#x27;Kings&#x27;,          &#x27;Placer&#x27;,          &#x27;Fresno&#x27;,\n            &#x27;Lake&#x27;,      &#x27;Stanislaus&#x27;,          &#x27;Sutter&#x27;,            &#x27;Yuba&#x27;,        &#x27;Mariposa&#x27;,            &#x27;Napa&#x27;,          &#x27;Madera&#x27;,          &#x27;Sonoma&#x27;,          &#x27;Shasta&#x27;,          &#x27;Tulare&#x27;,\n          &#x27;Nevada&#x27;,           &#x27;Marin&#x27;,        &#x27;Siskiyou&#x27;,        &#x27;Tuolumne&#x27;,           &#x27;Other&#x27;,       &#x27;Calaveras&#x27;,       &#x27;El Dorado&#x27;,          &#x27;Amador&#x27;,         &#x27;Trinity&#x27;,          &#x27;Lassen&#x27;,\n          &#x27;Colusa&#x27;,          &#x27;Plumas&#x27;,        &#x27;Humboldt&#x27;,          &#x27;Alpine&#x27;,            &#x27;Mono&#x27;,    &#x27;Other County&#x27;,            &#x27;Inyo&#x27;,           &#x27;Modoc&#x27;,       &#x27;Del Norte&#x27;, &#x27;Foreign Country&#x27;,\n     &#x27;Other State&#x27;,           &#x27;Clark&#x27;,          &#x27;Sierra&#x27;]\nLength: 63, dtype: str</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pvuO",
+      "code_hash": "f8fbf7ac8f1f6470239f4b0ab0a0742d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">What to do with 'Levels' and 'Flooring'</span>\n<span class=\"paragraph\">What to do with 'MLSAreaMajor'</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ICKg",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
     }
   ]
 }
