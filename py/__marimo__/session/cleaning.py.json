@@ -1,10 +1,23 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.13",
+    "marimo_version": "0.23.14",
     "script_metadata_hash": null
   },
   "cells": [
+    {
+      "id": "mSWr",
+      "code_hash": "21783778246ef94adedfe5490b293175",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">TODO: complete Gropgrahic Data Checks section</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
     {
       "id": "Hbol",
       "code_hash": "591d4ebfe27c5ab61529bcb9947a309b",
@@ -33,12 +46,12 @@
     },
     {
       "id": "vblA",
-      "code_hash": "5e7a8474d912c34917d6fb1a4275c643",
+      "code_hash": "3658a5f825e775aa0fbfa8db8933f857",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">First, let's remove all the columns that have more than 60% of their values missing. These columns are mostly useless for the purposes of this data analysis project or have too much missing that it is not worth keeping or trying to impute.</span>\n<span class=\"paragraph\">Let's also remove buyer and listing agent related columns since we care about real estate, not the agents.</span>\n<span class=\"paragraph\">Next let's remove columns that are redundant, namely UnparsedAddress and StreetNumberNumeric (Longitude and Latitude does the same job), LotSizeAcres and LotSizeSquareFeet (redundant with LotSizeArea, which is the same unit of measurement as LivingArea), and PropertyType (all remaining properties are Residential)</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">First let's change the date fields into datetime format</span></span>"
           }
         }
       ],
@@ -46,7 +59,7 @@
     },
     {
       "id": "bkHC",
-      "code_hash": "40ebb4ef5b495ea00ef6224c65990a14",
+      "code_hash": "77c7a539c07c07347fc3eb96bec0f2b3",
       "outputs": [
         {
           "type": "data",
@@ -59,13 +72,79 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Dropping 29 columns with >60% missing:\n['CloseDate', 'ClosePrice', 'BuyerOfficeName', 'CoListOfficeName', 'CoListAgentFirstName', 'CoListAgentLastName', 'BuyerAgentMlsId', 'BuyerAgentFirstName', 'BuyerAgentLastName', 'FireplacesTotal', 'AboveGradeFinishedArea', 'TaxAnnualAmount', 'ElementarySchool', 'BuilderName', 'SubdivisionName', 'BuyerOfficeAOR', 'BuyerAgencyCompensationType', 'BuyerAgencyCompensation', 'TaxYear', 'BuildingAreaTotal', 'ElementarySchoolDistrict', 'CoBuyerAgentFirstName', 'BelowGradeFinishedArea', 'BusinessType', 'CoveredSpaces', 'MiddleOrJuniorSchool', 'HighSchool', 'LotSizeDimensions', 'MiddleOrJuniorSchoolDistrict'] \n\nRemoving 9 agent columns from listings:\n['ListAgentEmail', 'ListAgentFirstName', 'ListAgentFullName', 'ListAgentLastName', 'ListOfficeName', 'ListingKey', 'Unnamed: 0', 'ListingKeyNumeric', 'ListingId'] \n\nRemoved redundant columns from listings:\n['UnparsedAddress', 'StreetNumberNumeric', 'LotSizeAcres', 'LotSizeSquareFeet', 'PropertyType'] \n\n\n Index(['OriginalListPrice', 'Latitude', 'Longitude', 'LivingArea', 'ListPrice', 'DaysOnMarket', 'AssociationFeeFrequency', 'MLSAreaMajor', 'CountyOrParish', 'MlsStatus', 'AttachedGarageYN',\n       'ParkingTotal', 'PropertySubType', 'YearBuilt', 'BathroomsTotalInteger', 'City', 'BedroomsTotal', 'ContractStatusChangeDate', 'PurchaseContractDate', 'ListingContractDate', 'StateOrProvince',\n       'FireplaceYN', 'Stories', 'Levels', 'LotSizeArea', 'MainLevelBedrooms', 'NewConstructionYN', 'GarageSpaces', 'HighSchoolDistrict', 'PostalCode', 'AssociationFee', 'year_month',\n       'rate_30yr_fixed'],\n      dtype='str')\n",
+          "text": "CloseDate                   datetime64[us]\nPurchaseContractDate        datetime64[us]\nListingContractDate         datetime64[us]\nContractStatusChangeDate    datetime64[us]\ndtype: object\nCloseDate                   datetime64[us]\nPurchaseContractDate        datetime64[us]\nListingContractDate         datetime64[us]\nContractStatusChangeDate    datetime64[us]\ndtype: object\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
       "id": "lEQa",
+      "code_hash": "9a4e73e7953981d1150932b1129bdb17",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Next let's validate the logical order of date fields: ListingContractDate should precede PurchaseContractDate, which should precede CloseDate.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "489a2b06a6f3be9c0e7dab75e0638411",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "listings:\n  listing_after_close_flag: 79\n  purchase_after_close_flag: 266\n  negative_timeline_flag: 292\n\nsold:\n  listing_after_close_flag: 65\n  purchase_after_close_flag: 241\n  negative_timeline_flag: 280\n\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "Xref",
+      "code_hash": "9ad8f7ac25bb9ddba3944e65ff979426",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now, let's remove all the columns that have more than 90% of their values missing, these columns have too much of their data missing that it's not worth trying to keep/impute missingness.</span>\n<span class=\"paragraph\">Next let's remove columns that are redundant, namely UnparsedAddress and StreetNumberNumeric (Longitude and Latitude does the same job), LotSizeAcres and LotSizeSquareFeet (redundant with LotSizeArea, which is the same unit of measurement as LivingArea), PropertyType (all remaining properties are Residential), HighSchool (we have HighSchoolDistrict, and HighSchool has a much higher missing percentage), and ListAgentFirstName and ListAgentLastName (we already have ListAgentFullName).</span>\n<span class=\"paragraph\">Let's also remove the columns that doesn't give us important information for the property, namely ListAgentEmail, ListingKeyNumeric, ListingKey, and ListingId.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "91948dd67ecfd5116e0e4bde3dd7fe63",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Dropping 13 _columns with >90% missing:\n['FireplacesTotal', 'AboveGradeFinishedArea', 'TaxAnnualAmount', 'BuilderName', 'TaxYear', 'BuildingAreaTotal', 'ElementarySchoolDistrict', 'CoBuyerAgentFirstName', 'BelowGradeFinishedArea', 'BusinessType', 'CoveredSpaces', 'LotSizeDimensions', 'MiddleOrJuniorSchoolDistrict'] \n\nRemoved redundant _columns from listings:\n['UnparsedAddress', 'StreetNumberNumeric', 'LotSizeAcres', 'LotSizeSquareFeet', 'PropertyType', 'HighSchool', 'ListAgentFirstName', 'ListAgentLastName'] \n\nRemoved unimportant _columns:\n['ListAgentEmail', 'ListingKeyNumeric', 'ListingKey', 'ListingId', 'Unnamed: 0'] \n\n\n Index(['OriginalListPrice', 'CloseDate', 'ClosePrice', 'Latitude', 'Longitude', 'LivingArea', 'ListPrice', 'DaysOnMarket', 'ListOfficeName', 'BuyerOfficeName', 'CoListOfficeName',\n       'ListAgentFullName', 'CoListAgentFirstName', 'CoListAgentLastName', 'BuyerAgentMlsId', 'BuyerAgentFirstName', 'BuyerAgentLastName', 'AssociationFeeFrequency', 'MLSAreaMajor', 'CountyOrParish',\n       'MlsStatus', 'ElementarySchool', 'AttachedGarageYN', 'ParkingTotal', 'PropertySubType', 'SubdivisionName', 'BuyerOfficeAOR', 'YearBuilt', 'BuyerAgencyCompensationType',\n       'BathroomsTotalInteger', 'City', 'BuyerAgencyCompensation', 'BedroomsTotal', 'ContractStatusChangeDate', 'PurchaseContractDate', 'ListingContractDate', 'StateOrProvince',\n       'MiddleOrJuniorSchool', 'FireplaceYN', 'Stories', 'Levels', 'LotSizeArea', 'MainLevelBedrooms', 'NewConstructionYN', 'GarageSpaces', 'HighSchoolDistrict', 'PostalCode', 'AssociationFee',\n       'year_month', 'rate_30yr_fixed', 'listing_after_close_flag', 'purchase_after_close_flag', 'negative_timeline_flag'],\n      dtype='str')\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "BYtC",
       "code_hash": "e4622dd226e8ac8a0d1d6f5c6aa68665",
       "outputs": [
         {
@@ -79,13 +158,13 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "                          Missing Count  Missing %\nAssociationFeeFrequency          338226      57.17\nPurchaseContractDate             310110      52.42\nMainLevelBedrooms                270830      45.78\nHighSchoolDistrict               178244      30.13\nAssociationFee                   142666      24.11\nStories                          104089      17.59\nAttachedGarageYN                 103561      17.50\nLatitude                          80744      13.65\nLongitude                         80744      13.65\nMLSAreaMajor                      80313      13.58\nLevels                            64463      10.90\nLotSizeArea                       47671       8.06\nNewConstructionYN                 40638       6.87\nGarageSpaces                      32965       5.57\nContractStatusChangeDate           6919       1.17\nPropertySubType                    1361       0.23\nYearBuilt                          1016       0.17\nOriginalListPrice                   842       0.14\nFireplaceYN                         624       0.11\nLivingArea                          602       0.10\nCity                                597       0.10\nBedroomsTotal                       162       0.03\nBathroomsTotalInteger                57       0.01\nStateOrProvince                      58       0.01\nListPrice                             0       0.00\nMlsStatus                             0       0.00\nParkingTotal                         20       0.00\nDaysOnMarket                          0       0.00\nCountyOrParish                        0       0.00\nListingContractDate                   0       0.00\nPostalCode                           21       0.00\nyear_month                            0       0.00\nrate_30yr_fixed                       0       0.00\n",
+          "text": "                             Missing Count  Missing %\nElementarySchool                    521105      88.08\nMiddleOrJuniorSchool                521073      88.08\nBuyerAgencyCompensation             512626      86.65\nBuyerAgencyCompensationType         512606      86.64\nCoListAgentFirstName                459574      77.68\nCoListAgentLastName                 459129      77.61\nCoListOfficeName                    459029      77.59\nClosePrice                          446653      75.50\nBuyerOfficeAOR                      443865      75.03\nBuyerOfficeName                     433324      73.24\nBuyerAgentFirstName                 431809      72.99\nBuyerAgentMlsId                     431176      72.88\nBuyerAgentLastName                  431067      72.86\nCloseDate                           423654      71.61\nSubdivisionName                     374070      63.23\nAssociationFeeFrequency             338226      57.17\nPurchaseContractDate                310110      52.42\nMainLevelBedrooms                   270830      45.78\nHighSchoolDistrict                  178244      30.13\nAssociationFee                      142666      24.11\nStories                             104089      17.59\nAttachedGarageYN                    103561      17.50\nLatitude                             80744      13.65\nLongitude                            80744      13.65\nMLSAreaMajor                         80313      13.58\nLevels                               64463      10.90\nLotSizeArea                          47671       8.06\nNewConstructionYN                    40638       6.87\nGarageSpaces                         32965       5.57\nContractStatusChangeDate              6919       1.17\nPropertySubType                       1361       0.23\nYearBuilt                             1016       0.17\nOriginalListPrice                      842       0.14\nFireplaceYN                            624       0.11\nCity                                   597       0.10\nLivingArea                             602       0.10\nBedroomsTotal                          162       0.03\nListAgentFullName                      104       0.02\nBathroomsTotalInteger                   57       0.01\nStateOrProvince                         58       0.01\nMlsStatus                                0       0.00\nListOfficeName                           0       0.00\nCountyOrParish                           0       0.00\nListPrice                                0       0.00\nDaysOnMarket                             0       0.00\nListingContractDate                      0       0.00\nParkingTotal                            20       0.00\nPostalCode                              21       0.00\nyear_month                               0       0.00\nrate_30yr_fixed                          0       0.00\nlisting_after_close_flag                 0       0.00\npurchase_after_close_flag                0       0.00\nnegative_timeline_flag                   0       0.00\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "PKri",
+      "id": "RGSE",
       "code_hash": "e5cff0ff55b353af76a33d76a701eee3",
       "outputs": [
         {
@@ -98,8 +177,8 @@
       "console": []
     },
     {
-      "id": "Xref",
-      "code_hash": "f4e61d063e8d70f94a1ef4cf51192e14",
+      "id": "Kclp",
+      "code_hash": "09e7c3e4f111a1be5f0d2fa4189cebdf",
       "outputs": [
         {
           "type": "data",
@@ -112,13 +191,13 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Dropping 26 columns with >60% missing:\n['WaterfrontYN', 'BasementYN', 'CoListOfficeName', 'CoListAgentFirstName', 'CoListAgentLastName', 'FireplacesTotal', 'AboveGradeFinishedArea', 'TaxAnnualAmount', 'ElementarySchool', 'BuilderName', 'SubdivisionName', 'TaxYear', 'BuildingAreaTotal', 'ElementarySchoolDistrict', 'CoBuyerAgentFirstName', 'BelowGradeFinishedArea', 'BusinessType', 'CoveredSpaces', 'MiddleOrJuniorSchool', 'HighSchool', 'LotSizeDimensions', 'MiddleOrJuniorSchoolDistrict', 'OriginatingSystemName', 'OriginatingSystemSubName', 'BuyerAgencyCompensationType', 'BuyerAgencyCompensation'] \n\nRemoving 16 agent columns from sold:\n['BuyerAgentFirstName', 'BuyerAgentLastName', 'BuyerAgentMlsId', 'BuyerAgentAOR', 'BuyerOfficeAOR', 'BuyerOfficeName', 'ListAgentEmail', 'ListAgentFirstName', 'ListAgentFullName', 'ListAgentLastName', 'ListAgentAOR', 'ListOfficeName', 'Unnamed: 0', 'ListingKey', 'ListingKeyNumeric', 'ListingId'] \n\nRemoved redundant columns from sold:\n['UnparsedAddress', 'StreetNumberNumeric', 'LotSizeAcres', 'LotSizeSquareFeet', 'PropertyType'] \n\n\n Index(['Flooring', 'ViewYN', 'PoolPrivateYN', 'OriginalListPrice', 'CloseDate', 'ClosePrice', 'Latitude', 'Longitude', 'LivingArea', 'ListPrice', 'DaysOnMarket', 'AssociationFeeFrequency',\n       'MLSAreaMajor', 'CountyOrParish', 'MlsStatus', 'AttachedGarageYN', 'ParkingTotal', 'PropertySubType', 'YearBuilt', 'BathroomsTotalInteger', 'City', 'BedroomsTotal', 'ContractStatusChangeDate',\n       'PurchaseContractDate', 'ListingContractDate', 'StateOrProvince', 'FireplaceYN', 'Stories', 'Levels', 'LotSizeArea', 'MainLevelBedrooms', 'NewConstructionYN', 'GarageSpaces',\n       'HighSchoolDistrict', 'PostalCode', 'AssociationFee', 'year_month', 'rate_30yr_fixed'],\n      dtype='str')\n",
+          "text": "Dropping 15 _columns with >90% missing:\n['WaterfrontYN', 'BasementYN', 'FireplacesTotal', 'AboveGradeFinishedArea', 'TaxAnnualAmount', 'BuilderName', 'TaxYear', 'BuildingAreaTotal', 'ElementarySchoolDistrict', 'CoBuyerAgentFirstName', 'BelowGradeFinishedArea', 'BusinessType', 'CoveredSpaces', 'LotSizeDimensions', 'MiddleOrJuniorSchoolDistrict'] \n\nRemoved redundant _columns from sold:\n['UnparsedAddress', 'StreetNumberNumeric', 'LotSizeAcres', 'LotSizeSquareFeet', 'PropertyType', 'HighSchool', 'ListAgentFirstName', 'ListAgentLastName'] \n\nRemoved unimportant _columns:\n['ListAgentEmail', 'ListingKeyNumeric', 'ListingKey', 'ListingId', 'Unnamed: 0'] \n\n\n Index(['BuyerAgentAOR', 'ListAgentAOR', 'Flooring', 'ViewYN', 'PoolPrivateYN', 'OriginalListPrice', 'CloseDate', 'ClosePrice', 'Latitude', 'Longitude', 'LivingArea', 'ListPrice', 'DaysOnMarket',\n       'ListOfficeName', 'BuyerOfficeName', 'CoListOfficeName', 'ListAgentFullName', 'CoListAgentFirstName', 'CoListAgentLastName', 'BuyerAgentMlsId', 'BuyerAgentFirstName', 'BuyerAgentLastName',\n       'AssociationFeeFrequency', 'MLSAreaMajor', 'CountyOrParish', 'MlsStatus', 'ElementarySchool', 'AttachedGarageYN', 'ParkingTotal', 'PropertySubType', 'SubdivisionName', 'BuyerOfficeAOR',\n       'YearBuilt', 'BathroomsTotalInteger', 'City', 'BedroomsTotal', 'ContractStatusChangeDate', 'PurchaseContractDate', 'ListingContractDate', 'StateOrProvince', 'MiddleOrJuniorSchool',\n       'FireplaceYN', 'Stories', 'Levels', 'LotSizeArea', 'MainLevelBedrooms', 'NewConstructionYN', 'GarageSpaces', 'HighSchoolDistrict', 'PostalCode', 'AssociationFee', 'OriginatingSystemName',\n       'OriginatingSystemSubName', 'BuyerAgencyCompensationType', 'BuyerAgencyCompensation', 'year_month', 'rate_30yr_fixed', 'listing_after_close_flag', 'purchase_after_close_flag',\n       'negative_timeline_flag'],\n      dtype='str')\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "SFPL",
+      "id": "emfo",
       "code_hash": "e922376abac8d278097666595173e307",
       "outputs": [
         {
@@ -132,26 +211,13 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "                          Missing Count  Missing %\nAssociationFeeFrequency          251091      58.33\nMainLevelBedrooms                180765      41.99\nFlooring                         154520      35.90\nHighSchoolDistrict               118431      27.51\nAssociationFee                    98544      22.89\nStories                           66102      15.36\nAttachedGarageYN                  65773      15.28\nMLSAreaMajor                      57740      13.41\nLevels                            41297       9.59\nPoolPrivateYN                     36950       8.58\nViewYN                            36781       8.54\nLotSizeArea                       33106       7.69\nNewConstructionYN                 32041       7.44\nGarageSpaces                      18487       4.29\nLongitude                         16083       3.74\nLatitude                          16083       3.74\nPropertySubType                     833       0.19\nOriginalListPrice                   789       0.18\nContractStatusChangeDate            589       0.14\nParkingTotal                        426       0.10\nYearBuilt                           382       0.09\nFireplaceYN                         347       0.08\nCity                                315       0.07\nLivingArea                          245       0.06\nPurchaseContractDate                197       0.05\nBathroomsTotalInteger                70       0.02\nClosePrice                            2       0.00\nCloseDate                             0       0.00\nListPrice                             0       0.00\nCountyOrParish                        0       0.00\nBedroomsTotal                        12       0.00\nMlsStatus                             0       0.00\nDaysOnMarket                          0       0.00\nStateOrProvince                       0       0.00\nListingContractDate                   1       0.00\nPostalCode                            3       0.00\nyear_month                            0       0.00\nrate_30yr_fixed                       0       0.00\n",
+          "text": "                             Missing Count  Missing %\nBuyerAgencyCompensation             384320      89.28\nBuyerAgencyCompensationType         384309      89.28\nElementarySchool                    373211      86.70\nMiddleOrJuniorSchool                372829      86.61\nOriginatingSystemName               358351      83.25\nOriginatingSystemSubName            358351      83.25\nCoListAgentFirstName                331733      77.07\nCoListAgentLastName                 331475      77.01\nCoListOfficeName                    328619      76.34\nSubdivisionName                     270170      62.77\nAssociationFeeFrequency             251091      58.33\nMainLevelBedrooms                   180765      41.99\nFlooring                            154520      35.90\nHighSchoolDistrict                  118431      27.51\nAssociationFee                       98544      22.89\nStories                              66102      15.36\nAttachedGarageYN                     65773      15.28\nMLSAreaMajor                         57740      13.41\nBuyerAgentAOR                        52622      12.23\nListAgentAOR                         46198      10.73\nLevels                               41297       9.59\nPoolPrivateYN                        36950       8.58\nViewYN                               36781       8.54\nLotSizeArea                          33106       7.69\nNewConstructionYN                    32041       7.44\nBuyerOfficeAOR                       25149       5.84\nGarageSpaces                         18487       4.29\nLatitude                             16083       3.74\nLongitude                            16083       3.74\nBuyerOfficeName                       6959       1.62\nBuyerAgentFirstName                   2068       0.48\nPropertySubType                        833       0.19\nOriginalListPrice                      789       0.18\nContractStatusChangeDate               589       0.14\nBuyerAgentMlsId                        562       0.13\nParkingTotal                           426       0.10\nYearBuilt                              382       0.09\nFireplaceYN                            347       0.08\nCity                                   315       0.07\nLivingArea                             245       0.06\nPurchaseContractDate                   197       0.05\nBuyerAgentLastName                     187       0.04\nBathroomsTotalInteger                   70       0.02\nListAgentFullName                       94       0.02\nCountyOrParish                           0       0.00\nMlsStatus                                0       0.00\nDaysOnMarket                             0       0.00\nListOfficeName                           0       0.00\nClosePrice                               2       0.00\nCloseDate                                0       0.00\nListPrice                                0       0.00\nBedroomsTotal                           12       0.00\nListingContractDate                      1       0.00\nStateOrProvince                          0       0.00\nPostalCode                               3       0.00\nyear_month                               0       0.00\nrate_30yr_fixed                          0       0.00\nlisting_after_close_flag                 0       0.00\npurchase_after_close_flag                0       0.00\nnegative_timeline_flag                   0       0.00\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "BYtC",
-      "code_hash": "3d90e87cd9e6bc6836cf2a3bf70eb87f",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now let's filter to only California properties and remove rows with YearBuilt above 2026.</span></span>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "RGSE",
+      "id": "Hstk",
       "code_hash": "6e433200326a17da5177eb126dc11a8e",
       "outputs": [
         {
@@ -164,8 +230,8 @@
       "console": []
     },
     {
-      "id": "Kclp",
-      "code_hash": "378d9dc2d3ebd9b780bb4d8c5d5e4782",
+      "id": "nWHF",
+      "code_hash": "dbd4cc09843d231c42abefc0a28cb431",
       "outputs": [
         {
           "type": "data",
@@ -178,55 +244,10 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Invalid values filter (Listings): 591619 -> 591590 rows\nInvalid values filter (Sold): 430445 -> 430442 rows\n\nStateOrProvince filter (listings): 591619 -> 591370\nStateOrProvince filter (sold): 430445 -> 430413\n\nYearBuilt filter (listings): 591370 -> 590343\nYearBuilt filter (sold): 430413 -> 430033\n",
+          "text": "Invalid values filter (Listings): 591619 -> 144966 rows\nInvalid values filter (Sold): 430445 -> 430442 rows\n\nStateOrProvince filter (listings): 591619 -> 144959\nStateOrProvince filter (sold): 430445 -> 430413\n\nYearBuilt filter (listings): 144959 -> 144846\nYearBuilt filter (sold): 430413 -> 430033\n",
           "mimetype": "text/plain"
         }
       ]
-    },
-    {
-      "id": "JyLE",
-      "code_hash": "99ce69e1a949e5ab5dbbce613dff7d8b",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/html": "<pre class='text-xs'>&lt;StringArray&gt;\n[                               &#x27;699 - Not Defined&#x27;,                            &#x27;91950 - National City&#x27;,                                                nan,\n                                    &#x27;TAR - Tarzana&#x27;,                            &#x27;SLO - San Luis Obispo&#x27;,                           &#x27;FBS - Fort Bragg South&#x27;,\n                       &#x27;92101 - San Diego Downtown&#x27;,                    &#x27;C21 - Silver Lake - Echo Park&#x27;,                           &#x27;680 - Mount Washington&#x27;,\n                               &#x27;PH - Portola Hills&#x27;,\n ...\n                                      &#x27;ONYX - Onyx&#x27;,                            &#x27;UCTY - Universal City&#x27;,                             &#x27;PL12 - Sierra County&#x27;,\n                                    &#x27;CYMA - Cuyama&#x27;,                              &#x27;LCCC - Copsey Creek&#x27;,                                   &#x27;225 - Romoland&#x27;,\n                                 &#x27;HYDE - Hyde Park&#x27;,           &#x27;VC54 - S.P. West of Ojai/S.P. Rd South&#x27;,                              &#x27;ALT - Alturas-Modoc&#x27;,\n &#x27;VC53 - S.P. East of Ojai/S.P. Rd To Center of Rl&#x27;]\nLength: 1090, dtype: str</pre>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "Pufh",
-      "code_hash": "388617923f8a0c9de0abcc8f614f89fe",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/html": "<pre class='text-xs'>&lt;StringArray&gt;\n[      &#x27;San Mateo&#x27;,       &#x27;San Diego&#x27;,       &#x27;Riverside&#x27;,     &#x27;Los Angeles&#x27;, &#x27;San Luis Obispo&#x27;,       &#x27;Mendocino&#x27;,     &#x27;Santa Clara&#x27;,          &#x27;Orange&#x27;,         &#x27;Alameda&#x27;,    &#x27;Contra Costa&#x27;,\n         &#x27;Ventura&#x27;,  &#x27;San Bernardino&#x27;,           &#x27;Glenn&#x27;,   &#x27;Santa Barbara&#x27;,      &#x27;Santa Cruz&#x27;,     &#x27;San Joaquin&#x27;,          &#x27;Solano&#x27;,   &#x27;San Francisco&#x27;,        &#x27;Monterey&#x27;,            &#x27;Yolo&#x27;,\n          &#x27;Merced&#x27;,            &#x27;Kern&#x27;,           &#x27;Butte&#x27;,        &#x27;Imperial&#x27;,      &#x27;San Benito&#x27;,      &#x27;Sacramento&#x27;,          &#x27;Tehama&#x27;,           &#x27;Kings&#x27;,          &#x27;Placer&#x27;,          &#x27;Fresno&#x27;,\n            &#x27;Lake&#x27;,      &#x27;Stanislaus&#x27;,          &#x27;Sutter&#x27;,            &#x27;Yuba&#x27;,        &#x27;Mariposa&#x27;,            &#x27;Napa&#x27;,          &#x27;Madera&#x27;,          &#x27;Sonoma&#x27;,          &#x27;Shasta&#x27;,          &#x27;Tulare&#x27;,\n          &#x27;Nevada&#x27;,           &#x27;Marin&#x27;,        &#x27;Siskiyou&#x27;,        &#x27;Tuolumne&#x27;,           &#x27;Other&#x27;,       &#x27;Calaveras&#x27;,       &#x27;El Dorado&#x27;,          &#x27;Amador&#x27;,         &#x27;Trinity&#x27;,          &#x27;Lassen&#x27;,\n          &#x27;Colusa&#x27;,          &#x27;Plumas&#x27;,        &#x27;Humboldt&#x27;,          &#x27;Alpine&#x27;,            &#x27;Mono&#x27;,    &#x27;Other County&#x27;,            &#x27;Inyo&#x27;,           &#x27;Modoc&#x27;,       &#x27;Del Norte&#x27;, &#x27;Foreign Country&#x27;,\n     &#x27;Other State&#x27;,           &#x27;Clark&#x27;,          &#x27;Sierra&#x27;]\nLength: 63, dtype: str</pre>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "pvuO",
-      "code_hash": "f8fbf7ac8f1f6470239f4b0ab0a0742d",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">What to do with 'Levels' and 'Flooring'</span>\n<span class=\"paragraph\">What to do with 'MLSAreaMajor'</span></span>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "ICKg",
-      "code_hash": null,
-      "outputs": [],
-      "console": []
     }
   ]
 }

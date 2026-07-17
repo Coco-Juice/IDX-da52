@@ -1,7 +1,15 @@
 import marimo
 
-__generated_with = "0.23.13"
+__generated_with = "0.23.14"
 app = marimo.App(width="medium")
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    TODO: complete Gropgrahic Data Checks section
+    """)
+    return
 
 
 @app.cell
@@ -25,42 +33,81 @@ def _(pd):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    First, let's remove all the columns that have more than 60% of their values missing. These columns are mostly useless for the purposes of this data analysis project or have too much missing that it is not worth keeping or trying to impute.
+    First let's change the date fields into datetime format
+    """)
+    return
 
-    Let's also remove buyer and listing agent related columns since we care about real estate, not the agents.
 
-    Next let's remove columns that are redundant, namely UnparsedAddress and StreetNumberNumeric (Longitude and Latitude does the same job), LotSizeAcres and LotSizeSquareFeet (redundant with LotSizeArea, which is the same unit of measurement as LivingArea), and PropertyType (all remaining properties are Residential)
+@app.cell
+def _(listings, pd, sold):
+    date_cols = ["CloseDate", "PurchaseContractDate", "ListingContractDate", "ContractStatusChangeDate"]
+
+    for _col in date_cols:
+        if _col in listings.columns:
+            listings[_col] = pd.to_datetime(listings[_col], errors="coerce")
+        if _col in sold.columns:
+            sold[_col] = pd.to_datetime(sold[_col], errors="coerce")
+
+    print(listings[date_cols].dtypes)
+    print(sold[date_cols].dtypes)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Next let's validate the logical order of date fields: ListingContractDate should precede PurchaseContractDate, which should precede CloseDate.
+    """)
+    return
+
+
+@app.cell
+def _(listings, sold):
+    for _df in [listings, sold]:
+        _df["listing_after_close_flag"] = _df["ListingContractDate"] > _df["CloseDate"]
+        _df["purchase_after_close_flag"] = _df["PurchaseContractDate"] > _df["CloseDate"]
+        _df["negative_timeline_flag"] = _df["ListingContractDate"] > _df["PurchaseContractDate"]
+
+    for _name, _df in [("listings", listings), ("sold", sold)]:
+        print(f"{_name}:")
+        print(f"  listing_after_close_flag: {_df['listing_after_close_flag'].sum()}")
+        print(f"  purchase_after_close_flag: {_df['purchase_after_close_flag'].sum()}")
+        print(f"  negative_timeline_flag: {_df['negative_timeline_flag'].sum()}")
+        print()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now, let's remove all the columns that have more than 90% of their values missing, these columns have too much of their data missing that it's not worth trying to keep/impute missingness.
+
+    Next let's remove columns that are redundant, namely UnparsedAddress and StreetNumberNumeric (Longitude and Latitude does the same job), LotSizeAcres and LotSizeSquareFeet (redundant with LotSizeArea, which is the same unit of measurement as LivingArea), PropertyType (all remaining properties are Residential), HighSchool (we have HighSchoolDistrict, and HighSchool has a much higher missing percentage), and ListAgentFirstName and ListAgentLastName (we already have ListAgentFullName).
+
+    Let's also remove the columns that doesn't give us important information for the property, namely ListAgentEmail, ListingKeyNumeric, ListingKey, and ListingId.
     """)
     return
 
 
 @app.cell
 def _(listings):
-    threshold = 0.6
+    threshold = 0.9
     _missing_pct = listings.isna().mean()
     _cols_to_drop = _missing_pct[_missing_pct > threshold].index.tolist()
-    print(f"Dropping {len(_cols_to_drop)} columns with >{threshold*100:.0f}% missing:")
+    print(f"Dropping {len(_cols_to_drop)} _columns with >{threshold*100:.0f}% missing:")
     print(_cols_to_drop, '\n')
     listings_dropped = listings.drop(columns=_cols_to_drop)
 
-    _agent_cols = [
-        "BuyerAgencyCompensation", "BuyerAgencyCompensationType",
-        "BuyerAgentFirstName", "BuyerAgentLastName", "BuyerAgentMlsId",
-        "BuyerOfficeAOR", "BuyerOfficeName", "CoBuyerAgentFirstName",
-        "CoListAgentFirstName", "CoListAgentLastName", "CoListOfficeName",
-        "ListAgentEmail", "ListAgentFirstName", "ListAgentFullName",
-        "ListAgentLastName", "ListOfficeName", "ListingKey", "Unnamed: 0",
-        "ListingKeyNumeric", "ListingId", 
-    ]
-    _cols_present = [c for c in _agent_cols if c in listings_dropped.columns]
-    print(f"Removing {len(_cols_present)} agent columns from listings:")
-    print(_cols_present, '\n')
-    listings_dropped = listings_dropped.drop(columns=_cols_present)
-
-    _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType"]
+    _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType", "HighSchool",
+                      "ListAgentFirstName", "ListAgentLastName"]
     listings_dropped = listings_dropped.drop(columns=_redundant_cols)
-    print(f"Removed redundant columns from listings:")
+    print(f"Removed redundant _columns from listings:")
     print(_redundant_cols, '\n')
+
+    _unimportant_cols = ["ListAgentEmail", "ListingKeyNumeric", "ListingKey", "ListingId", "Unnamed: 0"]
+    listings_dropped = listings_dropped.drop(columns=_unimportant_cols)
+    print(f"Removed unimportant _columns:")
+    print(_unimportant_cols, '\n')
 
     print("\n", listings_dropped.columns)
     return listings_dropped, threshold
@@ -89,29 +136,20 @@ def _(mo):
 def _(sold, threshold):
     _missing_pct = sold.isna().mean()
     _cols_to_drop = _missing_pct[_missing_pct > threshold].index.tolist()
-    print(f"Dropping {len(_cols_to_drop)} columns with >{threshold*100:.0f}% missing:")
+    print(f"Dropping {len(_cols_to_drop)} _columns with >{threshold*100:.0f}% missing:")
     print(_cols_to_drop, '\n')
     sold_dropped = sold.drop(columns=_cols_to_drop)
 
-    _agent_cols = [
-        "BuyerAgencyCompensation", "BuyerAgencyCompensationType",
-        "BuyerAgentFirstName", "BuyerAgentLastName", "BuyerAgentMlsId",
-        "BuyerAgentAOR", "BuyerOfficeAOR", "BuyerOfficeName",
-        "CoBuyerAgentFirstName",
-        "CoListAgentFirstName", "CoListAgentLastName", "CoListOfficeName",
-        "ListAgentEmail", "ListAgentFirstName", "ListAgentFullName",
-        "ListAgentLastName", "ListAgentAOR", "ListOfficeName", "Unnamed: 0",
-        "ListingKey", "ListingKeyNumeric", "ListingId"
-    ]
-    _cols_present = [c for c in _agent_cols if c in sold_dropped.columns]
-    print(f"Removing {len(_cols_present)} agent columns from sold:")
-    print(_cols_present, '\n')
-    sold_dropped = sold_dropped.drop(columns=_cols_present)
-
-    _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType"]
+    _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType", "HighSchool",
+                      "ListAgentFirstName", "ListAgentLastName"]
     sold_dropped = sold_dropped.drop(columns=_redundant_cols)
-    print(f"Removed redundant columns from sold:")
+    print(f"Removed redundant _columns from sold:")
     print(_redundant_cols, '\n')
+
+    _unimportant_cols = ["ListAgentEmail", "ListingKeyNumeric", "ListingKey", "ListingId", "Unnamed: 0"]
+    sold_dropped = sold_dropped.drop(columns=_unimportant_cols)
+    print(f"Removed unimportant _columns:")
+    print(_unimportant_cols, '\n')
 
     print("\n", sold_dropped.columns)
     return (sold_dropped,)
@@ -131,14 +169,6 @@ def _(pd, sold_dropped):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Now let's filter to only California properties and remove rows with YearBuilt above 2026.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
     Now let's remove rows with invalid numeric values: non-positive prices/areas, negative days on market, and negative bedrooms or bathrooms.
 
     Let's also filter to only California properties since that is the focus of this project, and also remove any properties that have YearBuilt above 2026
@@ -151,11 +181,11 @@ def _(listings_dropped, sold_dropped):
     _before_listings = len(listings_dropped)
     _before_sold = len(sold_dropped)
 
-    for col in ["LivingArea", "BedroomsTotal", "BathroomsFull", "DaysOnMarket", "ClosePrice"]:
-        if col in listings_dropped.columns:
-            listings_clean = listings_dropped[listings_dropped[col] > 0] if col != "DaysOnMarket" else listings_dropped[listings_dropped[col] >= 0]
-        if col in sold_dropped.columns:
-            sold_clean = sold_dropped[sold_dropped[col] > 0] if col != "DaysOnMarket" else sold_dropped[sold_dropped[col] >= 0]
+    for _col in ["LivingArea", "BedroomsTotal", "BathroomsFull", "DaysOnMarket", "ClosePrice"]:
+        if _col in listings_dropped.columns:
+            listings_clean = listings_dropped[listings_dropped[_col] > 0] if _col != "DaysOnMarket" else listings_dropped[listings_dropped[_col] >= 0]
+        if _col in sold_dropped.columns:
+            sold_clean = sold_dropped[sold_dropped[_col] > 0] if _col != "DaysOnMarket" else sold_dropped[sold_dropped[_col] >= 0]
 
     print(f"Invalid values filter (Listings): {_before_listings} -> {len(listings_clean)} rows")
     print(f"Invalid values filter (Sold): {_before_sold} -> {len(sold_clean)} rows\n")
@@ -173,33 +203,6 @@ def _(listings_dropped, sold_dropped):
         _before = len(sold_clean)
         sold_clean = sold_clean[sold_clean["YearBuilt"] <= 2026]
         print(f"YearBuilt filter (sold): {_before} -> {len(sold_clean)}")
-    return (sold_clean,)
-
-
-@app.cell
-def _(sold_clean):
-    sold_clean['MLSAreaMajor'].unique()
-    return
-
-
-@app.cell
-def _(sold_clean):
-    sold_clean['CountyOrParish'].unique()
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    What to do with 'Levels' and 'Flooring'
-
-    What to do with 'MLSAreaMajor'
-    """)
-    return
-
-
-@app.cell
-def _():
     return
 
 
