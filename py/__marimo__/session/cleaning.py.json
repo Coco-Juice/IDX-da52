@@ -6,19 +6,6 @@
   },
   "cells": [
     {
-      "id": "mSWr",
-      "code_hash": "21783778246ef94adedfe5490b293175",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">TODO: complete Gropgrahic Data Checks section</span></span>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
       "id": "Hbol",
       "code_hash": "591d4ebfe27c5ab61529bcb9947a309b",
       "outputs": [
@@ -218,20 +205,20 @@
     },
     {
       "id": "Hstk",
-      "code_hash": "6e433200326a17da5177eb126dc11a8e",
+      "code_hash": "c563ec699e766b8a0dd4f60ca129897b",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now let's remove rows with invalid numeric values: non-positive prices/areas, negative days on market, and negative bedrooms or bathrooms.</span>\n<span class=\"paragraph\">Let's also filter to only California properties since that is the focus of this project, and also remove any properties that have YearBuilt above 2026</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now let's remove rows with invalid numeric values: non-positive prices/areas, negative days on market, and negative bedrooms or bathrooms.</span>\n<span class=\"paragraph\">Let's also remove any properties that have YearBuilt above 2026 since they haven't been built yet.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "nWHF",
-      "code_hash": "dbd4cc09843d231c42abefc0a28cb431",
+      "id": "ZHCJ",
+      "code_hash": "5fa4f0a7647a489634ffe3db52990592",
       "outputs": [
         {
           "type": "data",
@@ -244,7 +231,40 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Invalid values filter (Listings): 591619 -> 144966 rows\nInvalid values filter (Sold): 430445 -> 430442 rows\n\nStateOrProvince filter (listings): 591619 -> 144959\nStateOrProvince filter (sold): 430445 -> 430413\n\nYearBuilt filter (listings): 144959 -> 144846\nYearBuilt filter (sold): 430413 -> 430033\n",
+          "text": "LivingArea filter (listings): 591619 -> 590627\nLivingArea filter (sold): 430445 -> 430047\nBedroomsTotal filter (listings): 590627 -> 588379\nBedroomsTotal filter (sold): 430047 -> 428913\nBathroomsTotalInteger filter (listings): 588379 -> 588245\nBathroomsTotalInteger filter (sold): 428913 -> 428802\nDaysOnMarket filter (listings): 588245 -> 588216\nDaysOnMarket filter (sold): 428802 -> 428754\nClosePrice filter (sold): 428754 -> 428751\n\nInvalid values filter (Listings): 591619 -> 588216 rows\nInvalid values filter (Sold): 430445 -> 428751 rows\n\nStateOrProvince filter (listings): 591619 -> 588020\nStateOrProvince filter (sold): 430445 -> 428724\n\nYearBuilt filter (listings): 588020 -> 587179\nYearBuilt filter (sold): 428724 -> 428416\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "011ae42a4eed0ad9943ad8a427f3cc5a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now let's validate the geographic coordinates. We need to flag:</span>\n<ul>\n<li>Records with missing coordinates (Latitude or Longitude is null)</li>\n<li>Latitude = 0 or Longitude = 0 (sentinel null values)</li>\n<li>Longitude &gt; 0 errors (California coordinates should be negative)</li>\n<li>Out-of-state or implausible coordinates (California bounds: 32.5\u00b0N to 42\u00b0N, -124.5\u00b0W to -114\u00b0W)</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "ca241685a05ff71849ada1a21c419561",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "listings geographic data checks:\n  Missing coordinates:  80348\n  Sentinel null (0,0):  69\n  Longitude > 0:        51\n  Out of CA bounds:     163\n  Total with issues:    80511\n\nsold geographic data checks:\n  Missing coordinates:  16015\n  Sentinel null (0,0):  34\n  Longitude > 0:        30\n  Out of CA bounds:     80\n  Total with issues:    16095\n\n",
           "mimetype": "text/plain"
         }
       ]

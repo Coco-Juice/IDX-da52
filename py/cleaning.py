@@ -4,14 +4,6 @@ __generated_with = "0.23.14"
 app = marimo.App(width="medium")
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    TODO: complete Gropgrahic Data Checks section
-    """)
-    return
-
-
 @app.cell
 def _():
     import marimo as mo
@@ -171,7 +163,7 @@ def _(mo):
     mo.md(r"""
     Now let's remove rows with invalid numeric values: non-positive prices/areas, negative days on market, and negative bedrooms or bathrooms.
 
-    Let's also filter to only California properties since that is the focus of this project, and also remove any properties that have YearBuilt above 2026
+    Let's also remove any properties that have YearBuilt above 2026 since they haven't been built yet.
     """)
     return
 
@@ -181,13 +173,25 @@ def _(listings_dropped, sold_dropped):
     _before_listings = len(listings_dropped)
     _before_sold = len(sold_dropped)
 
-    for _col in ["LivingArea", "BedroomsTotal", "BathroomsFull", "DaysOnMarket", "ClosePrice"]:
-        if _col in listings_dropped.columns:
-            listings_clean = listings_dropped[listings_dropped[_col] > 0] if _col != "DaysOnMarket" else listings_dropped[listings_dropped[_col] >= 0]
-        if _col in sold_dropped.columns:
-            sold_clean = sold_dropped[sold_dropped[_col] > 0] if _col != "DaysOnMarket" else sold_dropped[sold_dropped[_col] >= 0]
+    listings_clean = listings_dropped.copy()
+    sold_clean = sold_dropped.copy()
 
-    print(f"Invalid values filter (Listings): {_before_listings} -> {len(listings_clean)} rows")
+    for _col in ["LivingArea", "BedroomsTotal", "BathroomsTotalInteger", "DaysOnMarket"]:
+        if _col in listings_clean.columns:
+            _before = len(listings_clean)
+            listings_clean = listings_clean[listings_clean[_col] > 0] if _col != "DaysOnMarket" else listings_clean[listings_clean[_col] >= 0]
+            print(f"{_col} filter (listings): {_before} -> {len(listings_clean)}")
+        if _col in sold_clean.columns:
+            _before = len(sold_clean)
+            sold_clean = sold_clean[sold_clean[_col] > 0] if _col != "DaysOnMarket" else sold_clean[sold_clean[_col] >= 0]
+            print(f"{_col} filter (sold): {_before} -> {len(sold_clean)}")
+
+    if "ClosePrice" in sold_clean.columns:
+        _before = len(sold_clean)
+        sold_clean = sold_clean[sold_clean["ClosePrice"] > 0]
+        print(f"ClosePrice filter (sold): {_before} -> {len(sold_clean)}")
+
+    print(f"\nInvalid values filter (Listings): {_before_listings} -> {len(listings_clean)} rows")
     print(f"Invalid values filter (Sold): {_before_sold} -> {len(sold_clean)} rows\n")
 
     listings_clean = listings_clean[listings_clean["StateOrProvince"] == "CA"]
@@ -203,6 +207,46 @@ def _(listings_dropped, sold_dropped):
         _before = len(sold_clean)
         sold_clean = sold_clean[sold_clean["YearBuilt"] <= 2026]
         print(f"YearBuilt filter (sold): {_before} -> {len(sold_clean)}")
+    return listings_clean, sold_clean
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now let's validate the geographic coordinates. We need to flag:
+    - Records with missing coordinates (Latitude or Longitude is null)
+    - Latitude = 0 or Longitude = 0 (sentinel null values)
+    - Longitude > 0 errors (California coordinates should be negative)
+    - Out-of-state or implausible coordinates (California bounds: 32.5°N to 42°N, -124.5°W to -114°W)
+    """)
+    return
+
+
+@app.cell
+def _(listings_clean, sold_clean):
+    CA_LAT_MIN, CA_LAT_MAX = 32.5, 42.0
+    CA_LON_MIN, CA_LON_MAX = -124.5, -114.0
+
+    for _name, _df in [("listings", listings_clean), ("sold", sold_clean)]:
+        _df["missing_coords_flag"] = _df["Latitude"].isna() | _df["Longitude"].isna()
+        _df["sentinel_null_flag"] = (_df["Latitude"] == 0) | (_df["Longitude"] == 0)
+        _df["lon_positive_flag"] = _df["Longitude"] > 0
+        _df["out_of_bounds_flag"] = (
+            (_df["Latitude"] < CA_LAT_MIN) | (_df["Latitude"] > CA_LAT_MAX) |
+            (_df["Longitude"] < CA_LON_MIN) | (_df["Longitude"] > CA_LON_MAX)
+        )
+        _df["any_geo_issue"] = (
+            _df["missing_coords_flag"] | _df["sentinel_null_flag"] |
+            _df["lon_positive_flag"] | _df["out_of_bounds_flag"]
+        )
+
+        print(f"{_name} geographic data checks:")
+        print(f"  Missing coordinates:  {_df['missing_coords_flag'].sum()}")
+        print(f"  Sentinel null (0,0):  {_df['sentinel_null_flag'].sum()}")
+        print(f"  Longitude > 0:        {_df['lon_positive_flag'].sum()}")
+        print(f"  Out of CA bounds:     {_df['out_of_bounds_flag'].sum()}")
+        print(f"  Total with issues:    {_df['any_geo_issue'].sum()}")
+        print()
     return
 
 
