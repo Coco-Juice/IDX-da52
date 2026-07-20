@@ -86,19 +86,19 @@ def _(listings):
     threshold = 0.9
     _missing_pct = listings.isna().mean()
     _cols_to_drop = _missing_pct[_missing_pct > threshold].index.tolist()
-    print(f"Dropping {len(_cols_to_drop)} _columns with >{threshold*100:.0f}% missing:")
+    print(f"Dropping {len(_cols_to_drop)} columns with >{threshold*100:.0f}% missing:")
     print(_cols_to_drop, '\n')
     listings_dropped = listings.drop(columns=_cols_to_drop)
 
     _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType", "HighSchool",
                       "ListAgentFirstName", "ListAgentLastName"]
     listings_dropped = listings_dropped.drop(columns=_redundant_cols)
-    print(f"Removed redundant _columns from listings:")
+    print(f"Removed redundant columns from listings:")
     print(_redundant_cols, '\n')
 
     _unimportant_cols = ["ListAgentEmail", "ListingKeyNumeric", "ListingKey", "ListingId", "Unnamed: 0"]
     listings_dropped = listings_dropped.drop(columns=_unimportant_cols)
-    print(f"Removed unimportant _columns:")
+    print(f"Removed unimportant columns:")
     print(_unimportant_cols, '\n')
 
     print("\n", listings_dropped.columns)
@@ -128,19 +128,19 @@ def _(mo):
 def _(sold, threshold):
     _missing_pct = sold.isna().mean()
     _cols_to_drop = _missing_pct[_missing_pct > threshold].index.tolist()
-    print(f"Dropping {len(_cols_to_drop)} _columns with >{threshold*100:.0f}% missing:")
+    print(f"Dropping {len(_cols_to_drop)} columns with >{threshold*100:.0f}% missing:")
     print(_cols_to_drop, '\n')
     sold_dropped = sold.drop(columns=_cols_to_drop)
 
     _redundant_cols = ["UnparsedAddress", "StreetNumberNumeric", "LotSizeAcres", "LotSizeSquareFeet", "PropertyType", "HighSchool",
                       "ListAgentFirstName", "ListAgentLastName"]
     sold_dropped = sold_dropped.drop(columns=_redundant_cols)
-    print(f"Removed redundant _columns from sold:")
+    print(f"Removed redundant columns from sold:")
     print(_redundant_cols, '\n')
 
     _unimportant_cols = ["ListAgentEmail", "ListingKeyNumeric", "ListingKey", "ListingId", "Unnamed: 0"]
     sold_dropped = sold_dropped.drop(columns=_unimportant_cols)
-    print(f"Removed unimportant _columns:")
+    print(f"Removed unimportant columns:")
     print(_unimportant_cols, '\n')
 
     print("\n", sold_dropped.columns)
