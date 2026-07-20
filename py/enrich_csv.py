@@ -1,20 +1,65 @@
 import marimo
 
-__generated_with = "0.23.11"
+__generated_with = "0.23.14"
 app = marimo.App(width="medium")
 
 
 @app.cell
 def _():
+    import geopandas as gpd
     import pandas as pd
+    from shapely.geometry import Point
 
-    return (pd,)
+    return Point, gpd, pd
 
 
 @app.cell
-def _(pd):
+def _(Point, gpd, pd):
     listings = pd.read_csv("csv/listings.csv", low_memory=False)
     sold = pd.read_csv("csv/sold.csv", low_memory=False)
+
+    # Load the school district GeoJSON into a GeoDataFrame
+    districts = gpd.read_file("csv/DistrictAreas2526_-284845464123469011.geojson")
+
+    # Filter to Unified school districts only
+    unified = districts[districts["DistrictType"] == "Unified"].copy()
+
+    # Convert property Latitude/Longitude into geographic points (EPSG:4326)
+    # Keep them as regular DataFrames during the conversion
+    listings_geo = listings[listings['Latitude'].notna() & listings['Longitude'].notna()].copy()
+    sold_geo = sold[sold['Latitude'].notna() & sold['Longitude'].notna()].copy()
+
+    listings_geo["geometry"] = [
+        Point(x, y) for x, y in zip(listings_geo["Longitude"], listings_geo["Latitude"])
+    ]
+    sold_geo["geometry"] = [
+        Point(x, y) for x, y in zip(sold_geo["Longitude"], sold_geo["Latitude"])
+    ]
+    listings_geo = gpd.GeoDataFrame(listings_geo, geometry="geometry", crs="EPSG:4326")
+    sold_geo = gpd.GeoDataFrame(sold_geo, geometry="geometry", crs="EPSG:4326")
+
+    # Spatial join: find which Unified district contains each property
+    # Reproject districts to match property CRS (EPSG:4326)
+    unified = unified.to_crs("EPSG:4326")
+    listings_geo = gpd.sjoin(
+        listings_geo, unified[["DistrictName", "geometry"]], how="left", predicate="intersects",
+    )
+    # Handle duplicate matches: keep first
+    listings_geo = listings_geo[~listings_geo.index.duplicated(keep="first")]
+
+    sold_geo = gpd.sjoin(
+        sold_geo, unified[["DistrictName", "geometry"]], how="left", predicate="intersects",
+    )
+    sold_geo = sold_geo[~sold_geo.index.duplicated(keep="first")]
+
+    # Drop the geometry column and index column from sjoin
+    listings_geo = listings_geo.drop(columns=["geometry", "index_right"])
+    sold_geo = sold_geo.drop(columns=["geometry", "index_right"])
+
+    # Keep DistrictName on the geo DataFrames too
+    # Merge the DistrictName back into the full DataFrames on index
+    listings["DistrictName"] = listings_geo["DistrictName"]
+    sold["DistrictName"] = sold_geo["DistrictName"]
     return listings, sold
 
 
