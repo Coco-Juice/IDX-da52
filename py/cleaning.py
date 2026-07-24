@@ -250,5 +250,21 @@ def _(listings_clean, sold_clean):
     return
 
 
+@app.cell
+def _(listings_clean, sold_clean):
+    print('Final row count after cleaning:\n')
+    print('Listings: ', listings_clean.shape[0])
+    print('Sold: ', sold_clean.shape[0])
+    return
+
+
+@app.cell
+def _(listings_clean, sold_clean):
+    # Save the cleaned dataframe
+    listings_clean.to_csv('csv/listings_cleaned.csv')
+    sold_clean.to_csv('csv/sold_cleaned.csv')
+    return
+
+
 if __name__ == "__main__":
     app.run()
