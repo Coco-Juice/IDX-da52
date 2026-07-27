@@ -1,13 +1,13 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.14",
+    "marimo_version": "0.23.15",
     "script_metadata_hash": null
   },
   "cells": [
     {
       "id": "Hbol",
-      "code_hash": "591d4ebfe27c5ab61529bcb9947a309b",
+      "code_hash": "752fea805823d9961bb42853c75f4199",
       "outputs": [
         {
           "type": "data",
@@ -66,7 +66,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "9973a413d1086e42d023075e916972f0",
+      "code_hash": "62a76a036102e0b4221d305ff9635026",
       "outputs": [
         {
           "type": "data",
@@ -75,7 +75,26 @@
           }
         }
       ],
-      "console": []
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "\n================================================================================\n  LISTINGS \u2014 Percentile Summaries\n================================================================================\n\n  price_ratio  (n=143,463)\n    Min:                 0.00\n    P1:                  0.80\n    P5:                  0.89\n    P25:                 0.97\n    Median:              1.00\n    Mean:                 inf\n    P75:                 1.03\n    P95:                 1.14\n    P99:                 1.33\n    Max:                  inf\n",
+          "mimetype": "text/plain"
+        },
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "/home/tony/IDX-SU26/.venv/lib/python3.13/site-packages/pandas/core/nanops.py:1028: RuntimeWarning: invalid value encountered in subtract\n  sqr = _ensure_numeric((avg - values) ** 2)\n",
+          "mimetype": "text/plain"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "    Std:                  nan\n\n  price_per_sqft  (n=144,296)\n    Min:                 0.37\n    P1:                170.89\n    P5:                236.80\n    P25:               395.95\n    Median:            564.71\n    Mean:              661.21\n    P75:               766.08\n    P95:             1,285.71\n    P99:             1,964.20\n    Max:           684,474.12\n    Std:             3,744.48\n\n  listing_to_contract  (n=280,399)\n    Min:              -731.00\n    P1:                  0.00\n    P5:                  1.00\n    P25:                 7.00\n    Median:             13.00\n    Mean:               22.62\n    P75:                26.00\n    P95:                81.00\n    P99:               142.00\n    Max:               258.00\n    Std:                28.03\n\n  contract_to_close  (n=167,212)\n    Min:              -169.00\n    P1:                  0.00\n    P5:                  3.00\n    P25:                18.00\n    Median:             25.00\n    Mean:               26.61\n    P75:                32.00\n    P95:                52.00\n    P99:                83.00\n    Max:             1,484.00\n    Std:                17.54\n\n================================================================================\n  SOLD \u2014 Percentile Summaries\n================================================================================\n\n  price_ratio  (n=427,636)\n    Min:                 0.00\n    P1:                  0.75\n    P5:                  0.86\n    P25:                 0.95\n    Median:              1.00\n    Mean:                 inf\n    P75:                 1.02\n    P95:                 1.12\n    P99:                 1.28\n    Max:                  inf\n    Std:                  nan\n\n  price_per_sqft  (n=428,416)\n    Min:                 0.00\n    P1:                161.78\n    P5:                226.23\n    P25:               368.03\n    Median:            536.82\n    Mean:              647.21\n    P75:               731.86\n    P95:             1,215.14\n    P99:             1,886.18\n    Max:         1,164,066.85\n    Std:             5,157.24\n\n  listing_to_contract  (n=428,220)\n    Min:           -36,407.00\n    P1:                  0.00\n    P5:                  3.00\n    P25:                10.00\n    Median:             25.00\n    Mean:               45.04\n    P75:                58.00\n    P95:               152.00\n    P99:               274.00\n    Max:            14,657.00\n    Std:                86.33\n\n  contract_to_close  (n=428,221)\n    Min:              -331.00\n    P1:                  0.00\n    P5:                  7.00\n    P25:                21.00\n    Median:             29.00\n    Mean:               31.61\n    P75:                36.00\n    P95:                64.00\n    P99:               117.00\n    Max:            36,629.00\n    Std:                61.51\n",
+          "mimetype": "text/plain"
+        }
+      ]
     }
   ]
 }
