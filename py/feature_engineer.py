@@ -71,5 +71,17 @@ def _(features, groups, listings):
     return
 
 
+@app.cell
+def _(listings, sold):
+    listings.to_csv('csv/listings_engineered.csv')
+    sold.to_csv('csv/sold_engineered.csv')
+    return
+
+
+@app.cell
+def _():
+    return
+
+
 if __name__ == "__main__":
     app.run()
