@@ -32,7 +32,20 @@
       "console": []
     },
     {
-      "id": "bkHC",
+      "id": "JDhz",
+      "code_hash": "0f84405e14c0112a055d0b75e17ed777",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let's remove records from listings and sold that fall outside of the interquartile range (IQR). This is to remove outliers that skew statistical measures and misrepresent the typical market. </span>\n<span class=\"paragraph\">The dataframe with the records removed will be saved as separate csvs so that if we want to change anything we can come back and change the method of removing outliers.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
       "code_hash": "9473c05326156ffcc397d37ef0de1c11",
       "outputs": [
         {
@@ -52,7 +65,7 @@
       ]
     },
     {
-      "id": "lEQa",
+      "id": "bkHC",
       "code_hash": "0bacb10eea0efaa0636dac842351fc05",
       "outputs": [
         {
@@ -72,7 +85,20 @@
       ]
     },
     {
-      "id": "YvKc",
+      "id": "SeTX",
+      "code_hash": "5a3c926006a01b11bc93d63178d2f0f1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Save the filtered csvs separately.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
       "code_hash": "ad878acb35abc30ae0ff2e37e0031551",
       "outputs": [
         {

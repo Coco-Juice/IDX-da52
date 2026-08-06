@@ -13,7 +13,7 @@ def _():
     pd.set_option("display.max_columns", None)
     pd.set_option("display.max_rows", None)
     pd.set_option("display.width", 200)
-    return (pd,)
+    return mo, pd
 
 
 @app.cell
@@ -21,6 +21,16 @@ def _(pd):
     listings = pd.read_csv("csv/listings_engineered.csv", low_memory=False)
     sold = pd.read_csv("csv/sold_engineered.csv", low_memory=False)
     return listings, sold
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let's remove records from listings and sold that fall outside of the interquartile range (IQR). This is to remove outliers that skew statistical measures and misrepresent the typical market.
+
+    The dataframe with the records removed will be saved as separate csvs so that if we want to change anything we can come back and change the method of removing outliers.
+    """)
+    return
 
 
 @app.cell
@@ -56,6 +66,14 @@ def _(columns, sold):
     print('Listings dataframe shape before:', sold.shape)
     print('Listings dataframe shape after:', sold_cleaned.shape)
     return (sold_cleaned,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Save the filtered csvs separately.
+    """)
+    return
 
 
 @app.cell

@@ -1,18 +1,31 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.14",
+    "marimo_version": "0.23.15",
     "script_metadata_hash": null
   },
   "cells": [
     {
       "id": "Hbol",
-      "code_hash": "5be5f5dbd94b9f9da2d74371cfd7bb93",
+      "code_hash": "8bd93c6df9cce0e6201fb9067bf9bdeb",
       "outputs": [
         {
           "type": "data",
           "data": {
             "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "rimK",
+      "code_hash": "6ae9f2b60365e8b7b65221e99302d1a6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">L</span></span>"
           }
         }
       ],
@@ -26,6 +39,19 @@
           "type": "data",
           "data": {
             "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Zvnt",
+      "code_hash": "6d6b6201647b8767ad9774ae246eb246",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let's also add the national 30-year fixed mortgage rates to further enrich the dataset.</span></span>"
           }
         }
       ],

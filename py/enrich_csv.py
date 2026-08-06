@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.14"
+__generated_with = "0.23.15"
 app = marimo.App(width="medium")
 
 
@@ -8,9 +8,18 @@ app = marimo.App(width="medium")
 def _():
     import geopandas as gpd
     import pandas as pd
+    import marimo as mo
     from shapely.geometry import Point
 
-    return Point, gpd, pd
+    return Point, gpd, mo, pd
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let's add school districts into the real estate records using their latitude and longitude values.
+    """)
+    return
 
 
 @app.cell
@@ -61,6 +70,14 @@ def _(Point, gpd, pd):
     listings["DistrictName"] = listings_geo["DistrictName"]
     sold["DistrictName"] = sold_geo["DistrictName"]
     return listings, sold
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let's also add the national 30-year fixed mortgage rates to further enrich the dataset.
+    """)
+    return
 
 
 @app.cell
