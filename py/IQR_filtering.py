@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.15"
+__generated_with = "0.23.16"
 app = marimo.App(width="medium")
 
 
@@ -35,7 +35,7 @@ def _(mo):
 
 @app.cell
 def _(listings):
-    columns = ['ClosePrice', 'price_ratio', 'price_per_sqft', 'DaysOnMarket']
+    columns = ['ClosePrice', 'LivingArea', 'DaysOnMarket']
     listings_cleaned = listings.copy()
 
     for _col in columns:
@@ -48,6 +48,10 @@ def _(listings):
 
     print('Listings dataframe shape before:', listings.shape)
     print('Listings dataframe shape after:', listings_cleaned.shape)
+
+    for _col in columns:
+        print('Listings median', _col, 'value before:', listings[_col].median())
+        print('Listings median', _col, 'value after:', listings_cleaned[_col].median())
     return columns, listings_cleaned
 
 
@@ -63,8 +67,12 @@ def _(columns, sold):
         _upper = _Q3 + 1.5 * _IQR
         sold_cleaned = sold_cleaned[sold_cleaned[_col].between(_lower, _upper) | sold_cleaned[_col].isna()]
 
-    print('Listings dataframe shape before:', sold.shape)
-    print('Listings dataframe shape after:', sold_cleaned.shape)
+    print('Sold dataframe shape before:', sold.shape)
+    print('Sold dataframe shape after:', sold_cleaned.shape)
+
+    for _col in columns:
+        print('Sold median', _col, 'value before:', sold[_col].median())
+        print('Sold median', _col, 'value after:', sold_cleaned[_col].median())
     return (sold_cleaned,)
 
 

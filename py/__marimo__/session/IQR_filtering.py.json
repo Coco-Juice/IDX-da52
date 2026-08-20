@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.15",
+    "marimo_version": "0.23.16",
     "script_metadata_hash": null
   },
   "cells": [
@@ -32,41 +32,21 @@
       "console": []
     },
     {
-      "id": "JDhz",
-      "code_hash": "0f84405e14c0112a055d0b75e17ed777",
+      "id": "vblA",
+      "code_hash": "bca33b7f1e9d7a8af5491d4a4c5d29dc",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let's remove records from listings and sold that fall outside of the interquartile range (IQR). This is to remove outliers that skew statistical measures and misrepresent the typical market. </span>\n<span class=\"paragraph\">The dataframe with the records removed will be saved as separate csvs so that if we want to change anything we can come back and change the method of removing outliers.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let's remove records from listings and sold that fall outside of the interquartile range (IQR). This is to remove outliers that skew statistical measures and misrepresent the typical market.</span>\n<span class=\"paragraph\">The dataframe with the records removed will be saved as separate csvs so that if we want to change anything we can come back and change the method of removing outliers.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "vblA",
-      "code_hash": "9473c05326156ffcc397d37ef0de1c11",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "Listings dataframe shape before: (587179, 62)\nListings dataframe shape after: (519679, 62)\n",
-          "mimetype": "text/plain"
-        }
-      ]
-    },
-    {
       "id": "bkHC",
-      "code_hash": "0bacb10eea0efaa0636dac842351fc05",
+      "code_hash": "7aa0f1a8bd84922e327d9c2b3f1aca53",
       "outputs": [
         {
           "type": "data",
@@ -79,13 +59,33 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Listings dataframe shape before: (428416, 69)\nListings dataframe shape after: (335289, 69)\n",
+          "text": "Listings dataframe shape before: (587179, 62)\nListings dataframe shape after: (507764, 62)\nListings median ClosePrice value before: 860000.0\nListings median ClosePrice value after: 830000.0\nListings median LivingArea value before: 1675.0\nListings median LivingArea value after: 1617.0\nListings median DaysOnMarket value before: 11.0\nListings median DaysOnMarket value after: 9.0\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "SeTX",
+      "id": "lEQa",
+      "code_hash": "926fbbee66171bea2f814461cdf0bbd7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Sold dataframe shape before: (428416, 69)\nSold dataframe shape after: (361386, 69)\nSold median ClosePrice value before: 825000.0\nSold median ClosePrice value after: 788990.0\nSold median LivingArea value before: 1647.0\nSold median LivingArea value after: 1572.0\nSold median DaysOnMarket value before: 18.0\nSold median DaysOnMarket value after: 16.0\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "PKri",
       "code_hash": "5a3c926006a01b11bc93d63178d2f0f1",
       "outputs": [
         {
@@ -98,7 +98,7 @@
       "console": []
     },
     {
-      "id": "lEQa",
+      "id": "Xref",
       "code_hash": "ad878acb35abc30ae0ff2e37e0031551",
       "outputs": [
         {
