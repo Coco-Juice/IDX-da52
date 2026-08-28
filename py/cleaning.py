@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.14"
+__generated_with = "0.23.16"
 app = marimo.App(width="medium")
 
 
@@ -247,6 +247,31 @@ def _(listings_clean, sold_clean):
         print(f"  Out of CA bounds:     {_df['out_of_bounds_flag'].sum()}")
         print(f"  Total with issues:    {_df['any_geo_issue'].sum()}")
         print()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let's also make all the buyer office and listing agent names capitalized so displaying them in the future would look cleaner, and remove any commas from buyer office names to try and reduce some duplicate names.
+    """)
+    return
+
+
+@app.cell
+def _(sold_clean):
+    sold_clean["BuyerOfficeName"] = (
+        sold_clean["BuyerOfficeName"]
+        .astype("string")
+        .str.replace(",", "", regex=False)
+        .str.upper()
+    )
+
+    sold_clean["ListAgentFullName"] = (
+        sold_clean["ListAgentFullName"]
+        .astype("string")
+        .str.title()
+    )
     return
 
 
