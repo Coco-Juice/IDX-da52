@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.15"
+__generated_with = "0.23.16"
 app = marimo.App(width="medium")
 
 
@@ -75,11 +75,6 @@ def _(features, groups, listings):
 def _(listings, sold):
     listings.to_csv('csv/listings_engineered.csv')
     sold.to_csv('csv/sold_engineered.csv')
-    return
-
-
-@app.cell
-def _():
     return
 
 

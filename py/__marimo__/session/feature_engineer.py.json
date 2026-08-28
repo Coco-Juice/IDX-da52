@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.15",
+    "marimo_version": "0.23.16",
     "script_metadata_hash": null
   },
   "cells": [
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "id": "QPGU",
+      "id": "PKri",
       "code_hash": "d96d15897cfd019baab63767c55e77c7",
       "outputs": [
         {
@@ -103,6 +103,19 @@
           "mimetype": "text/plain"
         }
       ]
+    },
+    {
+      "id": "Xref",
+      "code_hash": "6a548c9bb40a731e3691bcee5716ff1f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
     }
   ]
 }
