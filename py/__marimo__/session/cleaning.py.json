@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.16",
+    "marimo_version": "0.24.0",
     "script_metadata_hash": null
   },
   "cells": [
@@ -270,7 +270,7 @@
       ]
     },
     {
-      "id": "ZpNi",
+      "id": "ROlb",
       "code_hash": "b7f73f317d70ae3693a976659e9822e3",
       "outputs": [
         {
@@ -283,8 +283,8 @@
       "console": []
     },
     {
-      "id": "ROlb",
-      "code_hash": "1f35ab1408a8005cc605d7a2221c0d98",
+      "id": "qnkX",
+      "code_hash": "b3cddad37db06c831757fe867e986df6",
       "outputs": [
         {
           "type": "data",
@@ -296,7 +296,7 @@
       "console": []
     },
     {
-      "id": "qnkX",
+      "id": "TqIu",
       "code_hash": "61ac40e1be767e730a2256c497c49939",
       "outputs": [
         {
@@ -316,7 +316,7 @@
       ]
     },
     {
-      "id": "TqIu",
+      "id": "Vxnm",
       "code_hash": "78845168fcc3eafee7d47730dd29c95b",
       "outputs": [
         {

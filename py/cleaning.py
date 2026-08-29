@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.16"
+__generated_with = "0.24.0"
 app = marimo.App(width="medium")
 
 
@@ -264,7 +264,7 @@ def _(sold_clean):
         sold_clean["BuyerOfficeName"]
         .astype("string")
         .str.replace(",", "", regex=False)
-        .str.upper()
+        .str.title()
     )
 
     sold_clean["ListAgentFullName"] = (
