@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.16"
+__generated_with = "0.24.0"
 app = marimo.App(width="medium")
 
 
@@ -53,21 +53,17 @@ def _(listings, sold):
 
 
 @app.cell
-def _(sold):
+def _():
     features = ['price_ratio', 'price_per_sqft', 'listing_to_contract', 'contract_to_close']
     groups = ['PropertySubType', 'CountyOrParish', 'MLSAreaMajor', 'ListOfficeName', 'BuyerOfficeName']
 
-    for _group in groups:
+    '''for _group in groups:
         for _feat in features:
             sold.groupby(_group)[[_feat]].describe().to_csv(f"describe/sold_{_group} & {_feat}.csv")
-    return features, groups
 
-
-@app.cell
-def _(features, groups, listings):
     for _group in groups:
         for _feat in features:
-            listings.groupby(_group)[[_feat]].describe().to_csv(f"describe/listings_{_group} & {_feat}.csv")
+            listings.groupby(_group)[[_feat]].describe().to_csv(f"describe/listings_{_group} & {_feat}.csv")'''
     return
 
 
