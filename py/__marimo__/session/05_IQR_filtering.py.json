@@ -59,7 +59,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Listings dataframe shape before: (587179, 65)\nListings dataframe shape after: (507764, 65)\nListings median ClosePrice value before: 860000.0\nListings median ClosePrice value after: 830000.0\nListings median LivingArea value before: 1675.0\nListings median LivingArea value after: 1617.0\nListings median DaysOnMarket value before: 11.0\nListings median DaysOnMarket value after: 9.0\n",
+          "text": "Listings dataframe shape before: (653056, 65)\nListings dataframe shape after: (565870, 65)\nListings median ClosePrice value before: 860000.0\nListings median ClosePrice value after: 830000.0\nListings median LivingArea value before: 1675.0\nListings median LivingArea value after: 1616.0\nListings median DaysOnMarket value before: 11.0\nListings median DaysOnMarket value after: 10.0\n",
           "mimetype": "text/plain"
         }
       ]
@@ -79,7 +79,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Sold dataframe shape before: (428416, 72)\nSold dataframe shape after: (361386, 72)\nSold median ClosePrice value before: 825000.0\nSold median ClosePrice value after: 788990.0\nSold median LivingArea value before: 1647.0\nSold median LivingArea value after: 1572.0\nSold median DaysOnMarket value before: 18.0\nSold median DaysOnMarket value after: 16.0\n",
+          "text": "Sold dataframe shape before: (477840, 70)\nSold dataframe shape after: (403021, 70)\nSold median ClosePrice value before: 825000.0\nSold median ClosePrice value after: 789320.0\nSold median LivingArea value before: 1650.0\nSold median LivingArea value after: 1575.0\nSold median DaysOnMarket value before: 19.0\nSold median DaysOnMarket value after: 16.0\n",
           "mimetype": "text/plain"
         }
       ]

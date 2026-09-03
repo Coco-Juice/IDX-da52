@@ -1,0 +1,94 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "752fea805823d9961bb42853c75f4199",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "e5b06a82f22e82c0c6b4c067a6ba1999",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "77c7a539c07c07347fc3eb96bec0f2b3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "CloseDate                   datetime64[us]\nPurchaseContractDate        datetime64[us]\nListingContractDate         datetime64[us]\nContractStatusChangeDate    datetime64[us]\ndtype: object\nCloseDate                   datetime64[us]\nPurchaseContractDate        datetime64[us]\nListingContractDate         datetime64[us]\nContractStatusChangeDate    datetime64[us]\ndtype: object\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "5fa84ccea8bda0138d17ba3ece102749",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "4698ed6b13854f7e030bcab96a0838e4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&#x27;for _group in groups:\\n    for _feat in features:\\n        sold.groupby(_group)[[_feat]].describe().to_csv(f&quot;describe/sold_{_group} &amp; {_feat}.csv&quot;)\\n\\nfor _group in groups:\\n    for _feat in features:\\n        listings.groupby(_group)[[_feat]].describe().to_csv(f&quot;describe/listings_{_group} &amp; {_feat}.csv&quot;)&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "6a548c9bb40a731e3691bcee5716ff1f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

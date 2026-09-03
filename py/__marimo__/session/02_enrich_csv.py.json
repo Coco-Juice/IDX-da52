@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.23.15",
+    "marimo_version": "0.24.0",
     "script_metadata_hash": null
   },
   "cells": [
@@ -19,20 +19,20 @@
       "console": []
     },
     {
-      "id": "rimK",
-      "code_hash": "6ae9f2b60365e8b7b65221e99302d1a6",
+      "id": "MJUe",
+      "code_hash": "f0ce5aebe17a6f9e62061037ad882682",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">L</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let's add school districts into the real estate records using their latitude and longitude values.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "MJUe",
+      "id": "vblA",
       "code_hash": "bd56ce9b0db020e79828881713bdaf05",
       "outputs": [
         {
@@ -45,7 +45,7 @@
       "console": []
     },
     {
-      "id": "Zvnt",
+      "id": "bkHC",
       "code_hash": "6d6b6201647b8767ad9774ae246eb246",
       "outputs": [
         {
@@ -58,7 +58,7 @@
       "console": []
     },
     {
-      "id": "vblA",
+      "id": "lEQa",
       "code_hash": "4aa5f675585edad903b052e66b0bf148",
       "outputs": [
         {
@@ -71,7 +71,7 @@
       "console": []
     },
     {
-      "id": "bkHC",
+      "id": "PKri",
       "code_hash": "b15c3ac4b84dec70abf443d680a17faf",
       "outputs": [
         {
@@ -84,7 +84,7 @@
       "console": []
     },
     {
-      "id": "lEQa",
+      "id": "Xref",
       "code_hash": "86c1ecd6359b2caba61bf32e633c3526",
       "outputs": [
         {
@@ -97,7 +97,7 @@
       "console": []
     },
     {
-      "id": "PKri",
+      "id": "SFPL",
       "code_hash": "78a01ed26a6054630d7ff4b6a1c53c82",
       "outputs": [
         {
@@ -110,7 +110,7 @@
       "console": []
     },
     {
-      "id": "Xref",
+      "id": "BYtC",
       "code_hash": "1dbe1c4a4b3ff1052cf2fa258b7d13f1",
       "outputs": [
         {
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "id": "SFPL",
+      "id": "RGSE",
       "code_hash": "d2f712e965be243d3a987ec86f042905",
       "outputs": [
         {
@@ -150,7 +150,7 @@
       ]
     },
     {
-      "id": "BYtC",
+      "id": "Kclp",
       "code_hash": "5658a35846f17662d19fbaf8adf7af99",
       "outputs": [
         {
