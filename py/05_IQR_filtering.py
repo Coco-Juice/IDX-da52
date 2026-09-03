@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.16"
+__generated_with = "0.24.0"
 app = marimo.App(width="medium")
 
 
@@ -35,7 +35,7 @@ def _(mo):
 
 @app.cell
 def _(listings):
-    columns = ['ClosePrice', 'LivingArea', 'DaysOnMarket']
+    columns = ['ClosePrice', 'LivingArea', 'DaysOnMarket', 'price_ratio']
     listings_cleaned = listings.copy()
 
     for _col in columns:
